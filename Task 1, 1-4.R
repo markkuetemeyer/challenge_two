@@ -31,34 +31,33 @@ products
 transaction
 mfailures
 
+
 #P1################################################################################################################################################################
 
 #1. Merge the transactional dataset with the machine failures data set setting failure variable to 0 when no failure is recorded
 #Hint: The syntax to do merges is merge(dt1,dt2, by=c(‘field1’,’field2’),all.x=T) and to set to 0 try dt[is.na(failure),failure:=0]
 summary(mfailures)
-summary(transaction)
+summary(transactional)
 
-#merge transaction and mfailures data.tables
-merge_failures = merge(transaction,mfailures, by = c('machine', 'timestamp'), all.x=T)
-
-#replace NAs with 0 in new data.table "merge_failures"
-merge_failures[is.na(failure),failure:=0]
-
+transactional = merge(transactional,mfailures, by = c('machine', 'timestamp'), all.x=T)
+summary(transactional)
+transactional[is.na(failure),failure:=0]
+transactional
 #drop column.y because is a copy of column.x 
 #where column.x is the column named "column" in dt transation AND column.y is the column named "column" in dt mfailures
-merge_failures = merge_failures[,-6]
-merge_failures
+transactional <- subset( transactional, select = -column.y )
+transactional
 
 #-------------------------------------------------------------------------------------------------------------------------------
 #2. In the transactional data table, create a variable called “last_vend” containing the timestamp of the previous sale of each machine
 #Hint: Remember you can use the function “shift” once the data is ordered according to machine and date with function “order” i.e. dt = dt[order(x,y)], where x and y are column names of dt
 
 #order by machine and date
-transaction = transaction[order(machine,date)] 
+transactional = transactional[order(machine,date)] 
 
 #create "last stand colum" with shift (one down):
-transaction[, last_vend := shift(timestamp)]    #as DT.     #As DF: transaction$last_vend=transaction$shift(timestamp)
-summary(transaction)
+transactional[, last_vend := shift(timestamp)]    #as DT.     #As DF: transaction$last_vend=transaction$shift(timestamp)
+summary(transactional)
 
 # If we would like an empty first row for each machine:
 #transaction[, last_vend := c(NA, timestamp[-.N]), by=machine] 
@@ -68,7 +67,7 @@ summary(transaction)
 #Hint: Check function “difftime”
 help("difftime")  
 
-transaction[, deltahours := difftime(timestamp,last_vend,units = mins)]   
+transactional[, deltahours := difftime(timestamp,last_vend,units = 'hours')]   
 #check if in minutes (could be in auto, hours, secs, etc)
 
 #-------------------------------------------------------------------------------------------------------------------------------
@@ -78,8 +77,10 @@ transaction[, deltahours := difftime(timestamp,last_vend,units = mins)]
 #daily sales per machine. You can do this by doing a merge.
 #Hint: Check function merge again via help(merge)
 
-machine_daily_average = data.table(transaction[, .(avg_daily_sales = length(product_name)/uniqueN(date)),by=machine])
-machine_daily_average 
+machine_daily_average = transactional[, .(daily_sales_machine=length(product_name)/uniqueN(date)),by=machine]
+machine_daily_average
+transactional = merge(transactional,machine_daily_average, by = 'machine', all.x=T)
+transactional
 
 #P2################################################################################################################################################################
 
@@ -90,6 +91,9 @@ machine_daily_average
 #i.e. delta = deltahours /(24/daily_sales_machine). The interpretation of delta 
 #is the amount of “missed sales” if the machine was selling at a constant rate
 
+transactional$delta <- transactional[, .(delta=as.numeric(deltahours/(24/daily_sales_machine), units='hours'))]
+transactional
+
 
 #-------------------------------------------------------------------------------------------------------------------------------
 #6. Select 30% of the machines in the transactional data for testing and 70% of the machines 
@@ -99,6 +103,15 @@ machine_daily_average
 #Hint: Recall the syntax for the linear model is glm(target~ variable,data,family=’binomial’).
 #You can select 70% machines out of a machine list v, for example, with function 
 #sample(v,round(0.7*length(v),0),replace=F). Use help(sample) for more information
+
+set.seed(0)
+id <- sample(x=seq_len(nrow(transactional)), size=round(0.7*nrow(transactional), 0))
+
+train <- transactional[idx, ]
+test <- transactional[-idx, ]
+
+m <- glm(failure ~ delta, train, family=binomial)
+summary(m)
 
 #P3################################################################################################################################################################
 

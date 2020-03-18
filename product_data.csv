@@ -1,0 +1,64 @@
+"product_name","category","type_drink_snack","price","cost","tax_rate"
+"water_(sparkling)_1","Water","drink",2.8,0.2,0.1
+"water_(still)_1","Water","drink",3.4,0.2,0.1
+"milk_and_milk-based_2","Milk based","drink",2.6,1.2,0.1
+"milk_and_milk-based_3","Milk based","drink",4.4,0.8,0.1
+"crisps_3","Salty","snack",1.8,1,0.1
+"milk_and_milk-based_1","Milk based","drink",2.7,0.6,0.1
+"milk_and_milk-based_4","Milk based","drink",4,0.7,0.1
+"tea_and_coffee_based_3","Juice, tea and smoothies","drink",2.8,0.3,0.1
+"unflavoured_carbonates_2","Carbonates and energy drinks","drink",2.9,0.5,0.1
+"unflavoured_carbonates_4","Carbonates and energy drinks","drink",2.8,0.5,0.1
+"bakery_and_pastries_5","Cookies, pastries and cereals","snack",2.3,0.3,0.1
+"flavoured_carbonates_4","Carbonates and energy drinks","drink",3.5,0.4,0.1
+"fruit_juices_1","Juice, tea and smoothies","drink",2.3,0.3,0.1
+"tea_and_coffee_based_1","Juice, tea and smoothies","drink",2,0.8,0.1
+"water_(still)_2","Water","drink",2.3,0.3,0.1
+"sport_energy_drinks_2","Carbonates and energy drinks","drink",4,1.9,0.1
+"sport_energy_drinks_1","Carbonates and energy drinks","drink",3.5,1.2,0.1
+"sport_energy_drinks_3","Carbonates and energy drinks","drink",2.6,0.3,0.1
+"smoothies_1","Juice, tea and smoothies","drink",2.5,1.9,0.1
+"fruit_juices_2","Juice, tea and smoothies","drink",2.9,0.9,0.1
+"unflavoured_carbonates_1","Carbonates and energy drinks","drink",3.5,0.9,0.1
+"flavoured_carbonates_5","Carbonates and energy drinks","drink",3.2,0.9,0.1
+"tea_and_coffee_based_4","Juice, tea and smoothies","drink",4,0.5,0.1
+"tea_and_coffee_based_2","Juice, tea and smoothies","drink",2.9,0.4,0.1
+"flavoured_carbonates_2","Carbonates and energy drinks","drink",3.3,0.7,0.1
+"unflavoured_carbonates_3","Carbonates and energy drinks","drink",3.4,0.7,0.1
+"tea_and_coffee_based_5","Juice, tea and smoothies","drink",3.5,0.7,0.1
+"water_(flavoured)_1","Water","drink",4,0.9,0.1
+"salty_excl_crisps_2","Salty","snack",3,1.8,0.1
+"salty_excl_crisps_4","Salty","snack",4.8,1.4,0.1
+"flavoured_carbonates_6","Carbonates and energy drinks","drink",4,0.8,0.1
+"salty_excl_crisps_3","Salty","snack",3.6,1.4,0.1
+"flavoured_carbonates_3","Carbonates and energy drinks","drink",3.6,0.9,0.1
+"water_(flavoured)_2","Water","drink",3.8,0.3,0.1
+"bakery_and_pastries_3","Cookies, pastries and cereals","snack",1.7,0.7,0.1
+"sugar_confectionary_incl_gums_5","Sugar candy","snack",2.5,1.1,0.1
+"sugar_confectionary_incl_gums_3","Sugar candy","snack",2.3,0.5,0.1
+"sugar_confectionary_incl_gums_7","Sugar candy","snack",1.9,0.8,0.1
+"sugar_confectionary_incl_gums_1","Sugar candy","snack",2.7,0.4,0.1
+"sugar_confectionary_incl_gums_6","Sugar candy","snack",2.1,0.8,0.1
+"bakery_and_pastries_6","Cookies, pastries and cereals","snack",2,0.6,0.1
+"energy_&_cereal_bars_1","Cookies, pastries and cereals","snack",1.7,0.3,0.1
+"chocolate_based_2","Chocolate based","snack",1.5,0.4,0.1
+"sugar_confectionary_incl_gums_2","Sugar candy","snack",2.4,0.5,0.1
+"chocolate_based_9","Chocolate based","snack",3.6,1.1,0.1
+"chocolate_based_11","Chocolate based","snack",1.8,0.4,0.1
+"chocolate_based_4","Chocolate based","snack",3.9,1.4,0.1
+"chocolate_based_7","Chocolate based","snack",1.9,0.5,0.1
+"chocolate_based_5","Chocolate based","snack",2.7,0.7,0.1
+"chocolate_based_8","Chocolate based","snack",1.8,0.5,0.1
+"chocolate_based_6","Chocolate based","snack",2.5,0.6,0.1
+"chocolate_based_3","Chocolate based","snack",1.8,0.5,0.1
+"chocolate_based_1","Chocolate based","snack",1.9,0.6,0.1
+"chocolate_based_10","Chocolate based","snack",2,0.4,0.1
+"sugar_confectionary_incl_gums_4","Sugar candy","snack",2.2,1.6,0.1
+"flavoured_carbonates_1","Carbonates and energy drinks","drink",2.1,0.5,0.1
+"crisps_1","Salty","snack",2.1,0.5,0.1
+"bakery_and_pastries_2","Cookies, pastries and cereals","snack",2.9,0.9,0.1
+"salty_excl_crisps_1","Salty","snack",1.7,0.5,0.1
+"bakery_and_pastries_1","Cookies, pastries and cereals","snack",3.1,0.2,0.1
+"crisps_4","Salty","snack",2,0.7,0.1
+"crisps_2","Salty","snack",2.8,0.4,0.1
+"bakery_and_pastries_4","Cookies, pastries and cereals","snack",3,0.5,0.1

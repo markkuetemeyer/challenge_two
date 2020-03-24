@@ -48,20 +48,11 @@ machines = data.table(machines)
 
 1. Merge the transactional dataset with the machine failures data set setting failure variable to 0 when no failure is recorded
 ```{r}
-#summary(mfailures)
-#summary(transaction)
-
-transactional = merge(transaction,mfailures, by = c('machine', 'timestamp'), all.x=T)
+# merge the datasets
+transactional = merge(transaction,mfailures, by = c('machine', 'timestamp', 'column'), all.x=T)
 setDT(transactional)
-
-summary(transactional)
+# set the failure value of normal records to 0
 transactional[is.na(failure),failure:=0]
-# head(transactional)
-#drop column.y because is a copy of column.x 
-#where column.x is the column named "column" in dt transation AND column.y is the column named "column" in dt mfailures
-transactional <- subset( transactional, select = -column.y )
-head(transactional)
-table(transactional$failure)
 ```
 
 2. In the transactional data table, create a variable called “last_vend” containing the timestamp of the previous sale of each machine
@@ -69,13 +60,13 @@ Hint: Remember you can use the function “shift” once the data is ordered acc
 to machine and date with function “order” i.e. dt = dt[order(x,y)], where x and y are column names of dt
 ```{r}
 #order by machine and date
-transactional = transactional[order(machine,date)] 
+transactional = transactional[order(machine, date)] 
 
 #create "last stand colum" with shift (one down):
-transactional[, last_vend := shift(timestamp)]  
-summary(transactional)
+transactional[, last_vend := shift(timestamp), by= machine]  
 # If we would like an empty first row for each machine: transaction[, last_vend := c(NA, timestamp[-.N]), by=machine] 
 ## Why would we need that?
+### Actually we need that, because the question asks for the "the previous sales of each machine", and the revised code should do the trick
 ```
 
 3. Create a new variable in the transactional data table called “deltahours” containing, for every sale, the hours that passed since the last sale
@@ -103,8 +94,22 @@ head(transactional)
 Use this auxiliary table to attach to every row of the transactional data table to the average daily sales per machine. 
 You can do this by doing a merge.
 ```{r}
-machine_daily_average = transactional[, .(daily_sales_machine=length(product_name)/uniqueN(date)),by=machine]
-transactional = merge(transactional,machine_daily_average, by = 'machine', all.x=T)
+# Not really the daily sales by doing so
+# machine_daily_average = transactional[, .(daily_sales_machine=length(product_name)/uniqueN(date)),by=machine]
+
+# first merge price into the dataset
+transactional <- merge(x = transactional,
+                       y = products[, .(product_name, price)],
+                       by = "product_name",
+                       all.x = T
+                       )
+# then create a table that first filters out failed purchase and calculates daily sales per machine, which is followed by calculating average daily sales.
+machine_daily_average <- transactional[failure == 0, .(daily_sales = sum(price)), by=.(machine, date)][, .(daily_sales_machine = mean(daily_sales)), by = machine]
+transactional <- merge(x = transactional,
+                       y = machine_daily_average,
+                       by = 'machine',
+                       all.x=T
+                       )
 head(transactional)
 
 ```

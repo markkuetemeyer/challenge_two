@@ -1,9 +1,9 @@
 ---
 title: "Challenge 2"
 output:
+  html_notebook: default
   html_document:
     df_print: paged
-  html_notebook: default
   pdf_document: default
 ---
 
@@ -250,14 +250,6 @@ profit_increase_high_risk = profit_increase(threshold_high_risk)
 sprintf("%1.2f%%", 100*profit_increase_high_risk)
 ```
 
-
-
-
-     
-     
-     
-     
-     
     
 
 
